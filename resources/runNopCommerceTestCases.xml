@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite parallel="false" name="NopCommerce">
-  <test name="Run on Firefox">
-    <classes>
-      <class name="com.nopcommerce.login.Level_01_Register_Login"/>
-    </classes>
-  </test> 
+	<parameter name="environment" value="local"/> 
+	<parameter name="server" value="testing"/> 
+	<listeners>
+		<listener class-name="common.MethodListener"/>	 
+		<listener class-name="org.uncommons.reportng.HTMLReporter"/>
+	    <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>	              
+	    <listener class-name="reportConfig.ReportNGListener"/>
+	</listeners>
+	
+	  <test name="Run on Firefox">
+	  <parameter name="browser" value="Firefox"/>	
+	    <classes>
+	      <class name="com.nopcommerce.login.Level_01_Register_Login"/>
+	    </classes>
+	  </test> 
+	  <test name="Run on Chrome">
+		<parameter name="browser" value="Chrome"/>	
+	    <classes>
+	      <class name="com.liveguru.login.Level_04_Login_Multi_Browser"/>      
+	    </classes>
+	  </test>  
+	<test name="Run on Edge Chromium">
+		<parameter name="browser" value="Edge"/>	
+	    <classes>
+	      <class name="com.liveguru.login.Level_04_Login_Multi_Browser"/>      
+	    </classes>
+	  </test> 
 </suite> 

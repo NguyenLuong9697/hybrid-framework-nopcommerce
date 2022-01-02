@@ -1,3 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- log ra console -->
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- log ra file: append=false:lưu log lần gần nhất-->
+	<appender name="logfile" class="org.apache.log4j.FileAppender">
+		<param name="file" value="./logs/Saucedemo.txt" />
+		<param name="append" value="false" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d] %m%n" />
+		</layout>
+	</appender>
+
+	<!-- log ra file: append=true:lưu log tất cả các lần chạy-->
+	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+		<param name="file" value="./logs/Saucedemo.log" />
+		<param name="append" value="true" />
+		<param name="maxFileSize" value="10MB" />
+		<param name="maxBackupIndex" value="10" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d] %m%n" />
+		</layout>
+	</appender>
+
+	<!--  add log vào report -->
+	<appender name="reportng" class="common.TestNGAppender">
+		<param name="Threshold" value="INFO" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%-5p] [%d] %m%n" />
+		</layout>
+	</appender>
+
+	<category name="com.nopcommerce.register">
+		<priority value="all" />
+		<appender-ref ref="console" />
+		<appender-ref ref="logfile" />
+		<appender-ref ref="file" />
+		<appender-ref ref="reportng" />
+	</category>
+	
+	<category name="com.nopcomerce.common">
+		<priority value="all" />
+		<appender-ref ref="console" />
+		<appender-ref ref="logfile" />
+		<appender-ref ref="file" />
+		<appender-ref ref="reportng" />
+	</category>
+
+	
+	<category name="reportConfig">
+		<priority value="all" />
+		<appender-ref ref="console" />
+		<appender-ref ref="logfile" />
+		<appender-ref ref="file" />
+		<appender-ref ref="reportng" />
+	</category>
 
 
+	<root>
+		<priority value="warn" />
+	</root>
+
+</log4j:configuration>
 
