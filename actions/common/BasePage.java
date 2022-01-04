@@ -18,6 +18,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import payUIs.UserBasePageUI;
+
 
 
 public class BasePage {
@@ -218,6 +220,10 @@ public class BasePage {
 		return getWebElement(driver, locator).getAttribute(attributeName);
 	}
 	public String getTextElement(WebDriver driver, String locator) {
+		return getWebElement(driver, locator).getText();
+	}
+	public String getTextElement(WebDriver driver, String locator,String...params) {
+		locator=getDynamiLocator(locator, params);
 		return getWebElement(driver, locator).getText();
 	}
 	public String convertRgbaToHex(String rgba) {
@@ -466,4 +472,28 @@ public class BasePage {
 	public void clickToElement(WebDriver driver, String locator, String... params) {
 		getWebElement(driver, getDynamiLocator(locator, params)).click();
 	}
+
+	//Nop-commerce
+	public void clickToHeaderLinkByName(WebDriver driver, String headerLinkText) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
+		
+	}
+
+	public void enterToTextboxByID(WebDriver driver, String idTextbox, String value) {
+		waitForElementVisible(driver,UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, idTextbox);
+		sendKeyToElement(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, value, idTextbox);
+	}
+	
+	public void clickToButtonByLabelName(WebDriver driver, String buttonLabelName) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_LABEL_NAME, buttonLabelName);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_LABEL_NAME, buttonLabelName);
+	}
+
+	public String getErrorMessageByID(WebDriver driver, String idErrorMessage) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_ERROR_MESSAGE, idErrorMessage);
+		return getTextElement(driver, UserBasePageUI.DYNAMIC_ERROR_MESSAGE, idErrorMessage);
+		
+	}
+	
 }

@@ -36,5 +36,8 @@
 	<classpathentry kind="lib" path="libReportNG/guice-3.0.jar"/>
 	<classpathentry kind="lib" path="libReportNG/reportng-1.1.4.jar"/>
 	<classpathentry kind="lib" path="libReportNG/velocity-1.4.jar"/>
+	<classpathentry kind="lib" path="libFaker/generex-1.0.2.jar"/>
+	<classpathentry kind="lib" path="libFaker/javafaker-1.0.1.jar"/>
+	<classpathentry kind="lib" path="libFaker/snakeyaml-1.23.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

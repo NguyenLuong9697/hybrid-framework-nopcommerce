@@ -12,19 +12,20 @@
 	  <test name="Run on Firefox">
 	  <parameter name="browser" value="Firefox"/>	
 	    <classes>
-	      <class name="com.nopcommerce.login.Level_01_Register_Login"/>
+	      <class name="com.nopcommerce.register.Register"/>
 	    </classes>
 	  </test> 
-	  <test name="Run on Chrome">
-		<parameter name="browser" value="Chrome"/>	
-	    <classes>
-	      <class name="com.liveguru.login.Level_04_Login_Multi_Browser"/>      
-	    </classes>
-	  </test>  
-	<test name="Run on Edge Chromium">
-		<parameter name="browser" value="Edge"/>	
-	    <classes>
-	      <class name="com.liveguru.login.Level_04_Login_Multi_Browser"/>      
-	    </classes>
-	  </test> 
+	  
+<!-- 	  <test name="Run on Chrome"> -->
+<!-- 		<parameter name="browser" value="Chrome"/>	 -->
+<!-- 	    <classes> -->
+<!-- 	      <class name="com.nopcommerce.register.Register"/>       -->
+<!-- 	    </classes> -->
+<!-- 	  </test>   -->
+<!-- 	<test name="Run on Edge Chromium"> -->
+<!-- 		<parameter name="browser" value="Edge"/>	 -->
+<!-- 	    <classes> -->
+<!-- 	      <class name="com.liveguru.login.Level_04_Login_Multi_Browser"/>       -->
+<!-- 	    </classes> -->
+<!-- 	  </test>  -->
 </suite> 

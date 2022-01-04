@@ -13,7 +13,7 @@
 
 	<!-- log ra file: append=false:lưu log lần gần nhất-->
 	<appender name="logfile" class="org.apache.log4j.FileAppender">
-		<param name="file" value="./logs/Saucedemo.txt" />
+		<param name="file" value="./logs/NopComerce.txt" />
 		<param name="append" value="false" />
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="[%-5p] [%d] %m%n" />
@@ -22,7 +22,7 @@
 
 	<!-- log ra file: append=true:lưu log tất cả các lần chạy-->
 	<appender name="file" class="org.apache.log4j.RollingFileAppender">
-		<param name="file" value="./logs/Saucedemo.log" />
+		<param name="file" value="./logs/NopComerce.log" />
 		<param name="append" value="true" />
 		<param name="maxFileSize" value="10MB" />
 		<param name="maxBackupIndex" value="10" />
