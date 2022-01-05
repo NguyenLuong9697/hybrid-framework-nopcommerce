@@ -22,7 +22,7 @@ public class Register extends BaseTest {
 	RegisterPageObject registerPageObject;
 	DataUtil data;
 	String firstName, lastName, fullName, emailAddress, password, confirmPassword;
-
+	
 	@Parameters({ "environment", "server", "browser", "ipAddress", "portNumber", "osName", "osVersion" })
 	@BeforeClass
 	public void beforeClass(@Optional("local") String environment, @Optional("testing") String serverName,
@@ -37,7 +37,7 @@ public class Register extends BaseTest {
 		homePageObject = PageGeneratorManager.getHomePageObject(driver);
 
 		log.info("Precondition 02: Click to Register link");
-		homePageObject.clickToHeaderLinkByName(driver, "Register");
+		homePageObject.clickToHeaderLinkByLabelName(driver, "Register");
 		registerPageObject = PageGeneratorManager.getRegisterPageObject(driver);
 	}
 
@@ -81,7 +81,7 @@ public class Register extends BaseTest {
 	public void TC_02_Register_Invalid_Email() {
 
 		log.info("TC_02_Register_Invalid_Email- Step 01: Click to Register link");
-		registerPageObject.clickToHeaderLinkByName(driver, "Register");
+		registerPageObject.clickToHeaderLinkByLabelName(driver, "Register");
 
 		firstName=data.getFirstName();
 		log.info("TC_01_Register_Empty_Data - Step 02: Enter to First Name: "+ firstName);
@@ -115,7 +115,7 @@ public class Register extends BaseTest {
 	public void TC_03_Register_Password_Less_6_Characters() {
 		
 		log.info("TC_03_Register_Password_Less_6_Characters- Step 01: Click to Register link");
-		registerPageObject.clickToHeaderLinkByName(driver, "Register");
+		registerPageObject.clickToHeaderLinkByLabelName(driver, "Register");
 
 		firstName=data.getFirstName();
 		log.info("TC_03_Register_Password_Less_6_Characters - Step 02: Enter to First Name: "+ firstName);
@@ -142,7 +142,7 @@ public class Register extends BaseTest {
 	@Test
 	public void TC_04_Register_Wrong_ConfirmPassword() {
 		log.info("TC_04_Register_Wrong_ConfirmPassword- Step 01: Click to Register link");
-		registerPageObject.clickToHeaderLinkByName(driver, "Register");
+		registerPageObject.clickToHeaderLinkByLabelName(driver, "Register");
 
 		firstName=data.getFirstName();
 		log.info("TC_04_Register_Wrong_ConfirmPassword - Step 02: Enter to First Name: "+ firstName);
@@ -173,7 +173,7 @@ public class Register extends BaseTest {
 	@Test
 	public void TC_05_Register_Valid_Information() {
 		log.info("TC_05_Register_Valid_Information- Step 01: Click to Register link");
-		registerPageObject.clickToHeaderLinkByName(driver, "Register");
+		registerPageObject.clickToHeaderLinkByLabelName(driver, "Register");
 
 		firstName=data.getFirstName();
 		log.info("TC_05_Register_Valid_Information- Step 02: Enter to First Name: "+ firstName);
@@ -202,13 +202,13 @@ public class Register extends BaseTest {
 		verifyEquals(registerPageObject.getRegisterMessageSuccessfull(),"Your registration completed");
 		
 		log.info("TC_05_Register_Valid_Information - Step 09: Click to Logout");
-		registerPageObject.clickToHeaderLinkByName(driver, "Log out");
+		registerPageObject.clickToHeaderLinkByLabelName(driver, "Log out");
 		homePageObject = PageGeneratorManager.getHomePageObject(driver);
 	}
 	@Test
 	public void TC_06_Register_Existed_Email() {
 		log.info("TC_06_Register_Existed_Email- Step 01: Click to Register link");
-		homePageObject.clickToHeaderLinkByName(driver, "Register");
+		homePageObject.clickToHeaderLinkByLabelName(driver, "Register");
 		registerPageObject = PageGeneratorManager.getRegisterPageObject(driver);
 		
 		firstName=data.getFirstName();

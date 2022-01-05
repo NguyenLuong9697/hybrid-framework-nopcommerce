@@ -12,7 +12,10 @@
 	  <test name="Run on Firefox">
 	  <parameter name="browser" value="Firefox"/>	
 	    <classes>
-	      <class name="com.nopcommerce.register.Register"/>
+	      <packages>
+<!-- 		      <package name="com.nopcommerce.register"/> -->
+		   		<package name="com.nopcommerce.login"/>
+	      </packages>
 	    </classes>
 	  </test> 
 	  

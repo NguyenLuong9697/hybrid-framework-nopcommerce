@@ -474,7 +474,7 @@ public class BasePage {
 	}
 
 	//Nop-commerce
-	public void clickToHeaderLinkByName(WebDriver driver, String headerLinkText) {
+	public void clickToHeaderLinkByLabelName(WebDriver driver, String headerLinkText) {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
 		clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
 		
@@ -494,6 +494,11 @@ public class BasePage {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_ERROR_MESSAGE, idErrorMessage);
 		return getTextElement(driver, UserBasePageUI.DYNAMIC_ERROR_MESSAGE, idErrorMessage);
 		
+	}
+	
+	public boolean isHeaderLinkDisplayByLabelName(WebDriver driver, String headerLinkText) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
+		return isElementDisplay(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
 	}
 	
 }
