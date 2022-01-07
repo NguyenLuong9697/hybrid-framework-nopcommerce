@@ -23,4 +23,32 @@ public class DataUtil {
 		return faker.internet().emailAddress();
 	}
 	
+	public String getFirstNameAddress() {
+		return faker.address().firstName();
+	}
+	
+	public String getLastNameAddress() {
+	
+		return faker.address().lastName();
+	}
+	
+	public String getCompanyName() {
+		return faker.company().name();
+	}
+	
+	public String getCityName() {
+		return faker.address().cityName();
+	}
+	
+	public String getFullAddress() {
+		return faker.address().fullAddress();
+	}
+	
+	public String getZipCode() {
+		return faker.address().zipCode();
+	}
+	
+	public String getPhoneNumber() {
+		return faker.phoneNumber().phoneNumber();
+	}
 }

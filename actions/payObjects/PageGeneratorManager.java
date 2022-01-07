@@ -22,4 +22,23 @@ public class PageGeneratorManager {
 		return new LoginPageObject(driver);
 	}
 	
+	public static ProductPageObject getProductPageObject(WebDriver driver) {
+		
+		return new ProductPageObject(driver);
+	}
+	
+	public static MyAccountPageObject getMyAccountPageObject(WebDriver driver) {
+		
+		return new MyAccountPageObject(driver);
+	}
+	
+	public static ProductDetailPageObject getProductDetailPageObject(WebDriver driver) {
+		
+		return new ProductDetailPageObject(driver);
+	}
+	
+	public static ProductReviewPageObject getProductReviewPageObject(WebDriver driver) {
+		
+		return new ProductReviewPageObject(driver);
+	}
 }

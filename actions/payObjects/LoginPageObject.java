@@ -4,7 +4,6 @@ import org.openqa.selenium.WebDriver;
 
 import common.BasePage;
 import payUIs.LoginPageUI;
-import payUIs.RegisterPageUI;
 
 public class LoginPageObject extends BasePage {
 	private WebDriver driver;
@@ -15,6 +14,7 @@ public class LoginPageObject extends BasePage {
 		waitForElementVisible(driver, LoginPageUI.ERROR_MESSAGE);
 		return getTextElement(driver, LoginPageUI.ERROR_MESSAGE);
 	}
+	
 	
 	
 	

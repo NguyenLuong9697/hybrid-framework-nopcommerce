@@ -1,6 +1,8 @@
 package common;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.testng.Reporter;
 import org.apache.commons.logging.Log;
@@ -186,5 +188,25 @@ public class BaseTest {
 			}
 		}
 	}
-
+	
+	public void sleepInSecond(long timeout) {
+		try {
+			Thread.sleep(timeout*1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public int randomNumber() {
+		Random rd=new Random();
+		return rd.nextInt(1000);
+		
+	}
+	public String getDatTimeNow() {
+		Calendar now = Calendar.getInstance();
+		int year = now.get(Calendar.YEAR);
+		int month = now.get(Calendar.MONTH) + 1; // Note: zero based!
+		int day = now.get(Calendar.DAY_OF_MONTH);
+		return month+"/"+day+"/"+year;
+	}
 }

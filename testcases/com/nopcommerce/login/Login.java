@@ -7,6 +7,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+
+import com.nopcommerce.register.Register;
+
 import common.BaseTest;
 import payObjects.HomePageObject;
 import payObjects.LoginPageObject;
@@ -66,7 +69,7 @@ public class Login extends BaseTest {
 		loginPageObject.clickToHeaderLinkByLabelName(driver, "Log in");
 
 		emailAddress="123456";
-		log.info("TC_02_Login_Invalid_Email - Step 02: Enter to Email: "+ emailAddress);
+		log.info("TC_02_Login_Invalid_Email - Step 02: Enter to Email: "+emailAddress);
 		loginPageObject.enterToTextboxByID(driver, "Email", emailAddress);
 
 		log.info("TC_02_Login_Invalid_Email - Step 03: Enter to password: Empty data");
@@ -83,7 +86,7 @@ public class Login extends BaseTest {
 		log.info("TC_03_Login_Unregistered_Email- Step 01: Click to Log in link");
 		loginPageObject.clickToHeaderLinkByLabelName(driver, "Log in");
 
-		emailAddress= data.getEmailAddress();
+		emailAddress = data.getEmailAddress();
 		log.info("TC_03_Login_Unregistered_Email - Step 02: Enter to Email: "+ emailAddress);
 		loginPageObject.enterToTextboxByID(driver, "Email", emailAddress);
 
@@ -136,8 +139,9 @@ public class Login extends BaseTest {
 		log.info("TC_04_Login_Valid_Email_EmptyPassword- Precondition 10: Click to Log in link");
 		homePageObject.clickToHeaderLinkByLabelName(driver, "Log in");
 		loginPageObject = PageGeneratorManager.getLoginPageObject(driver);
+
 		
-		log.info("TC_04_Login_Valid_Email_EmptyPassword - Step 01: Enter to Email: "+ emailAddress);
+		log.info("TC_04_Login_Valid_Email_EmptyPassword - Step 01: Enter to Email: "+emailAddress);
 		loginPageObject.enterToTextboxByID(driver, "Email", emailAddress);
 
 		
@@ -162,7 +166,7 @@ public class Login extends BaseTest {
 
 		password="123";
 		log.info("TC_05_Login_With_Wrong_Password - Step 03: Enter to password: "+password);
-		loginPageObject.enterToTextboxByID(driver, "Password",password);
+		loginPageObject.enterToTextboxByID(driver, "Password", password);
 		
 		log.info("TC_05_Login_With_Wrong_Password - Step 04: Click Log in button");
 		loginPageObject.clickToButtonByLabelName(driver, "Log in");
@@ -178,7 +182,7 @@ public class Login extends BaseTest {
 		loginPageObject = PageGeneratorManager.getLoginPageObject(driver);
 		
 		log.info("TC_06_Login_Success - Step 02: Enter to Email: "+ emailAddress);
-		loginPageObject.enterToTextboxByID(driver, "Email", emailAddress);
+		loginPageObject.enterToTextboxByID(driver, "Email",emailAddress);
 
 		password="123456";
 		log.info("TC_06_Login_Success - Step 03: Enter to password: "+password);

@@ -370,8 +370,18 @@ public class BasePage {
 		jsExecutor.executeScript("arguments[0].removeAttribute('" + attributeRemove + "');", getWebElement(driver,locator));
 	}
 
+	public String getTextElementByJS(WebDriver driver,String locator,String ...params) {
+		locator = getDynamiLocator(locator, params);
+		jsExecutor=(JavascriptExecutor)driver;
+		String script=" return $(document.evaluate(\"//input[@id='Address_FirstName']\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()";
+		//String s="$(document.evaluate("//input[@id='Address_FirstName']", document, nul"l, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()
+		//String script="$(document.evaluate(""+locator+ ", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()";
+		//System.out.println(s);
+		return (String) jsExecutor.executeScript(script);
+	}
 	public String getElementValidationMessage(WebDriver driver,String locator) {
 		jsExecutor=(JavascriptExecutor)driver;
+		
 		return (String) jsExecutor.executeScript("return arguments[0].validationMessage;", getWebElement(driver,locator));
 	}
 
@@ -500,5 +510,55 @@ public class BasePage {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
 		return isElementDisplay(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
 	}
+	
+	public String getDataInTextboxByID(WebDriver driver, String idTextbox) {
+		waitForElementVisible(driver,UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID ,idTextbox);
+		return getAttributeElement(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, "value", idTextbox);
+	}
+	
+	public void clickToRadioButtonByLabelName(WebDriver driver, String radioButtonLabelName) {
+		waitForElementClickable(driver,UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME , radioButtonLabelName);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME , radioButtonLabelName);
+		
+	}
+	
+	public void selectItemInDropDownByName(WebDriver driver, String dropdownName, String value) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_DROPDROWN_BY_NAME, dropdownName);
+		selectItemInDefaultDropdownByText(driver, UserBasePageUI.DYNAMIC_DROPDROWN_BY_NAME, value, dropdownName);
+		
+	}
+	
+	public boolean isRadioButtonSelectedByLabelName(WebDriver driver, String radioButtonLabelName) {
+		waitForElementVisible(driver,UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME , radioButtonLabelName);
+		return  isElementDisplay(driver,UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME , radioButtonLabelName);
+		
+	}
+	
+	public String getSelectedValueInDropdrownByName(WebDriver driver, String dropdownName) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_DROPDROWN_BY_NAME, dropdownName);
+		return getSelectedItemInDefaultDropdown(driver, UserBasePageUI.DYNAMIC_DROPDROWN_BY_NAME, dropdownName);
+		
+	}
+	public void clickToPageInLeftMenuByLabelName(WebDriver driver, String pageNameInLeftMenu) {
+		waitForElementClickable(driver,UserBasePageUI.DYNAMIC_PAGE_IN_LEFT_MENU , pageNameInLeftMenu);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_PAGE_IN_LEFT_MENU , pageNameInLeftMenu);
+		
+	}
+	
+	public void clickToFooterLinkByLabelName(WebDriver driver, String footerLinkByLabelName) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_LINK_FOOTER_BY_LABEL_NAME, footerLinkByLabelName);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_LINK_FOOTER_BY_LABEL_NAME, footerLinkByLabelName);
+	}
+
+	public void clickToMenuPageByLabelName(WebDriver driver, String menuPageLabelName) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_MENU_PAGE_BY_LABEL_NAME, menuPageLabelName);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_MENU_PAGE_BY_LABEL_NAME, menuPageLabelName);
+	}
+	
+	public void enterToTextAreaboxByID(WebDriver driver, String idTextArea, String value) {
+		waitForElementVisible(driver,UserBasePageUI.DYNAMIC_TEXTAREA_BY_ID, idTextArea);
+		sendKeyToElement(driver, UserBasePageUI.DYNAMIC_TEXTAREA_BY_ID, value, idTextArea);
+	}
+	
 	
 }
