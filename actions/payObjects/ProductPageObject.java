@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 
 import common.BasePage;
 import payUIs.ProductPageUI;
+import payUIs.SearchPageUI;
 
 public class ProductPageObject extends BasePage {
 	private WebDriver driver;
@@ -93,4 +94,37 @@ public class ProductPageObject extends BasePage {
 		return listProductPriceText.equals(listProductPriceTextClone);
 	}
 
+	public boolean isNumberProductInPage(int number) {
+		isJQueryLoadSuccess(driver);
+		waitForAllElementsVisible(driver, ProductPageUI.PRODUCT_NAME_TEXT);
+		List<WebElement> products= getListWebElements(driver, ProductPageUI.PRODUCT_NAME_TEXT);
+		if(products.size()<=number) return true;
+		else return false;
+	}
+
+	public void clickToPageNumber(String pageNumber) {
+		waitForElementClickable(driver, ProductPageUI.DYNAMIC_PAGGING_BY_NUMBER,pageNumber);
+		clickToElement(driver, ProductPageUI.DYNAMIC_PAGGING_BY_NUMBER,pageNumber);
+		
+	}
+	public boolean isPageNumberActive(String pageNumber) {
+		waitForElementVisible(driver, ProductPageUI.DYNAMIC_PAGGING_BY_NUMBER_ACTIVE,pageNumber);
+		return isElementDisplay(driver, ProductPageUI.DYNAMIC_PAGGING_BY_NUMBER_ACTIVE,pageNumber);
+	}
+
+	public boolean isNextPageIconDisplay() {
+		waitForElementVisible(driver, ProductPageUI.NEXT_PAGE_ICON);
+		return isElementDisplay(driver, ProductPageUI.NEXT_PAGE_ICON);
+	}
+
+	public boolean isPreviousPageIconDisplay() {
+		waitForElementVisible(driver, ProductPageUI.PREVIOUS_PAGE_ICON);
+		return isElementDisplay(driver, ProductPageUI.PREVIOUS_PAGE_ICON);
+	}
+
+	public boolean isPaggingNotDisplay() {
+		waitForElementInvisible(driver, ProductPageUI.PAGGING_PAGE);		
+		return isElementUndisplayed(driver, ProductPageUI.PAGGING_PAGE);
+		
+	}
 }

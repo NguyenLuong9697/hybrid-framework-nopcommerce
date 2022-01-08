@@ -18,7 +18,8 @@
 <!-- 				<package name="com.nopcommerce.login" /> -->
 <!-- 				<package name="com.nopcommerce.myaccount" /> -->
 <!-- 				<package name="com.nopcommerce.search" /> -->
-				<package name="com.nopcommerce.sort" />
+<!-- 				<package name="com.nopcommerce.sort" /> -->
+				<package name="com.nopcommerce.display" />
 			</packages>
 		</classes>
 	</test>
