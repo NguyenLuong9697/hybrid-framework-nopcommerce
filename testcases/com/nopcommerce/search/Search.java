@@ -20,13 +20,9 @@ public class Search extends BaseTest {
 
 	WebDriver driver;
 	IServer server;
-	HomePageObject homePageObject;
-	//RegisterPageObject registerPageObject;
-	//LoginPageObject loginPageObject;
+	HomePageObject homePageObject;	
 	SearchPageObject searchPageObject;
-	DataUtil data;
-	// String firstName, lastName, fullName, emailAddress, password,
-	// confirmPassword;
+	DataUtil data;	
 	String searchKey, categorySearch, manufacturer;
 
 	@Parameters({ "environment", "server", "browser", "ipAddress", "portNumber", "osName", "osVersion" })
@@ -41,39 +37,7 @@ public class Search extends BaseTest {
 		driver = getBrowserDriver(environment, server.url(), browserName, ipAddress, portNumber, osName, osVersion);
 		data = DataUtil.getData();
 		homePageObject = PageGeneratorManager.getHomePageObject(driver);
-		/*
-		 * log.info("Precondition 02: Click to Register link");
-		 * homePageObject.clickToHeaderLinkByLabelName(driver, "Register");
-		 * registerPageObject = PageGeneratorManager.getRegisterPageObject(driver);
-		 * 
-		 * firstName=data.getFirstName();
-		 * log.info("Precondition 03: Enter to First Name: "+ firstName);
-		 * registerPageObject.enterToTextboxByID(driver, "FirstName", firstName);
-		 * 
-		 * lastName =data.getLastName();
-		 * log.info("Precondition 04: Enter to Last Name: " + lastName);
-		 * registerPageObject.enterToTextboxByID(driver, "LastName", lastName);
-		 * 
-		 * emailAddress=data.getEmailAddress();
-		 * log.info("Precondition 05: Enter to Email: "+ emailAddress);
-		 * registerPageObject.enterToTextboxByID(driver, "Email", emailAddress);
-		 * 
-		 * password="123456"; log.info("Precondition 06: Enter to Password: "+
-		 * password); registerPageObject.enterToTextboxByID(driver, "Password",
-		 * password);
-		 * 
-		 * confirmPassword="123456";
-		 * log.info("Precondition 07: Enter to Confirm password: "+ confirmPassword);
-		 * registerPageObject.enterToTextboxByID(driver, "ConfirmPassword",
-		 * confirmPassword);
-		 * 
-		 * log.info("Precondition 08: Click to Register button");
-		 * registerPageObject.clickToButtonByLabelName(driver, "Register");
-		 * 
-		 * log.info("Precondition 09: verify register message successful");
-		 * verifyEquals(registerPageObject.getRegisterMessageSuccessfull()
-		 * ,"Your registration completed");
-		 */
+	
 	}
 
 	@Test

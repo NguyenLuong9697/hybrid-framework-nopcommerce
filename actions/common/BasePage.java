@@ -288,6 +288,11 @@ public class BasePage {
 		action= new Actions(driver);
 		action.moveToElement(getWebElement(driver, locator)).perform();
 	}
+	public void hoverMouseToElement(WebDriver driver, String locator, String...params) {
+		locator=getDynamiLocator(locator, params);
+		action= new Actions(driver);
+		action.moveToElement(getWebElement(driver, locator)).perform();
+	}
 	public void rightCLickToElement(WebDriver driver, String locator) {
 		action= new Actions(driver);
 		action.contextClick(getWebElement(driver, locator)).perform();
@@ -566,4 +571,12 @@ public class BasePage {
 		
 	}
 	
+	public void openSubMenuByLabelName(WebDriver driver, String menuLabel, String subMenuLabel) {
+		waitForElementClickable(driver,UserBasePageUI.DYNAMIC_MENU_PAGE_BY_LABEL_NAME ,menuLabel);
+		hoverMouseToElement(driver,UserBasePageUI.DYNAMIC_MENU_PAGE_BY_LABEL_NAME,menuLabel);
+		waitForElementClickable(driver,UserBasePageUI.DYNAMIC_SUB_MENU_PAGE_BY_LABEL_NAME ,subMenuLabel);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_SUB_MENU_PAGE_BY_LABEL_NAME ,subMenuLabel);
+		
+	}
+
 }
