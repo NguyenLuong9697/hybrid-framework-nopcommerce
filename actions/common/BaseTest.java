@@ -1,12 +1,20 @@
 package common;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import org.testng.Reporter;
+import org.testng.annotations.BeforeTest;
+
+
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import factoryEnvironment.BrowserStackFactory;
@@ -14,7 +22,6 @@ import factoryEnvironment.CrossbrowserFactory;
 import factoryEnvironment.GridLocalFactory;
 import factoryEnvironment.LocalFactory;
 import factoryEnvironment.SauceLabFactory;
-
 
 public class BaseTest {
 
@@ -61,69 +68,6 @@ public class BaseTest {
 		return driver;
 		
 	}
-
-	private boolean checkTrue(boolean condition) {
-		boolean pass = true;
-		try {
-			if (condition == true) {
-				log.info(" -------------------------- PASSED -------------------------- ");
-			} else {
-				log.info(" -------------------------- FAILED -------------------------- ");
-			}
-			Assert.assertTrue(condition);
-		} catch (Throwable e) {
-			pass = false;
-
-			// Add lỗi vào ReportNG
-			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
-			Reporter.getCurrentTestResult().setThrowable(e);
-		}
-		return pass;
-	}
-
-	protected boolean verifyTrue(boolean condition) {
-		return checkTrue(condition);
-	}
-
-	private boolean checkFailed(boolean condition) {
-		boolean pass = true;
-		try {
-			if (condition == false) {
-				log.info(" -------------------------- PASSED -------------------------- ");
-			} else {
-				log.info(" -------------------------- FAILED -------------------------- ");
-			}
-			Assert.assertFalse(condition);
-		} catch (Throwable e) {
-			pass = false;
-			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
-			Reporter.getCurrentTestResult().setThrowable(e);
-		}
-		return pass;
-	}
-
-	protected boolean verifyFalse(boolean condition) {
-		return checkFailed(condition);
-	}
-
-	private boolean checkEquals(Object actual, Object expected) {
-		boolean pass = true;
-		try {
-			Assert.assertEquals(actual, expected);
-			log.info(" -------------------------- PASSED -------------------------- ");
-		} catch (Throwable e) {
-			pass = false;
-			log.info(" -------------------------- FAILED -------------------------- ");
-			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
-			Reporter.getCurrentTestResult().setThrowable(e);
-		}
-		return pass;
-	}
-
-	protected boolean verifyEquals(Object actual, Object expected) {
-		return checkEquals(actual, expected);
-	}
-
 	public WebDriver getDriver() {
 		return this.driver;
 	}
@@ -209,4 +153,147 @@ public class BaseTest {
 		int day = now.get(Calendar.DAY_OF_MONTH);
 		return month+"/"+day+"/"+year;
 	}
+	private boolean checkTrue(boolean condition) {
+		
+		boolean pass = true;
+		try {
+			if (condition == true) {
+				log.info(" -------------------------- PASSED -------------------------- ");
+				//ExtentTestManager.getTest().log(LogStatus.INFO, "-------------------------- PASSED -------------------------- ");
+			} else {
+				//log4j
+				log.info(" -------------------------- FAILED -------------------------- ");
+				attachScreenShotToReportNG();
+				//extent
+				//ExtentTestManager.getTest().log(LogStatus.INFO, "-------------------------- FAILED -------------------------- ");
+				//tu them
+				//attchScreenShotToExtentReport();
+				
+				//
+			}
+			Assert.assertTrue(condition);
+		} catch (Throwable e) {
+			pass = false;
+
+			// Add lỗi vào ReportNG
+			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
+			Reporter.getCurrentTestResult().setThrowable(e);
+			//tu them
+			//attachScreenShotToReport();
+			//
+			attachScreenShotToReportNG();
+		}
+		return pass;
+	}
+
+	protected boolean verifyTrue(boolean condition) {
+		return checkTrue(condition);
+	}
+
+	private boolean checkFailed(boolean condition) {
+		boolean pass = true;
+		try {
+			if (condition == false) {
+				log.info(" -------------------------- PASSED -------------------------- ");
+				//ExtentTestManager.getTest().log(LogStatus.INFO, "-------------------------- PASSED -------------------------- ");
+			} else {
+				log.info(" -------------------------- FAILED -------------------------- ");
+				attachScreenShotToReportNG();
+				//ExtentTestManager.getTest().log(LogStatus.INFO, "-------------------------- FAILED -------------------------- ");
+				//tu them
+				//attchScreenShotToExtentReport();
+				//tu them
+			}
+			Assert.assertFalse(condition);
+		} catch (Throwable e) {
+			pass = false;
+			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
+			Reporter.getCurrentTestResult().setThrowable(e);
+			//tu them
+			//attachScreenShotToReport();
+			//
+			attachScreenShotToReportNG();
+		}
+		return pass;
+	}
+
+	protected boolean verifyFalse(boolean condition) {
+		return checkFailed(condition);
+	}
+
+	private boolean checkEquals(Object actual, Object expected) {
+		
+		boolean pass = true;
+		try {
+			Assert.assertEquals(actual, expected);
+			log.info(" -------------------------- PASSED -------------------------- ");
+			//ExtentTestManager.getTest().log(LogStatus.INFO, "-------------------------- PASSED -------------------------- ");
+		} catch (Throwable e) {
+			pass = false;
+			log.info(" -------------------------- FAILED -------------------------- ");
+			attachScreenShotToReportNG();
+			//ExtentTestManager.getTest().log(LogStatus.INFO, "-------------------------- FAILED -------------------------- ");
+			//tu them
+			//attchScreenShotToExtentReport();
+			
+			//
+			VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
+			Reporter.getCurrentTestResult().setThrowable(e);
+			//tu them
+			//attachScreenShotToReport();
+			//
+		}
+		return pass;
+	}
+
+	protected boolean verifyEquals(Object actual, Object expected) {
+		return checkEquals(actual, expected);
+	}
+	public void attachScreenShotToReportNG() {
+		System.setProperty("org.uncommons.reportng.escape-output", "false");
+
+		String screenshotPath = captureScreenshot(driver,"FAIL");
+		//Reporter.getCurrentTestResult();
+		Reporter.log("<br><a target=\"_blank\" href=\"file:///" + screenshotPath + "\">" + "<img src=\"file:///" + screenshotPath + "\" " + "height='100' width='150'/> " + "</a></br>");
+		//Reporter.setCurrentTestResult(null);
+	}
+	public String captureScreenshot(WebDriver driver, String screenshotName) {
+		try {
+			Calendar calendar = Calendar.getInstance();
+			SimpleDateFormat formater = new SimpleDateFormat("dd_MM_yyyy_hh_mm_ss");
+			File source = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+			String screenPath = System.getProperty("user.dir") + "\\screenshotReportNG\\" + screenshotName + "_" + formater.format(calendar.getTime()) + ".png";
+			FileUtils.copyFile(source, new File(screenPath));
+			return screenPath;
+		} catch (IOException e) {
+			System.out.println("Exception while taking screenshot: " + e.getMessage());
+			return e.getMessage();
+		}
+	}
+	@BeforeTest
+	public void deleteAllFilesInReportNGScreenshot() {
+		log.info("---------- START delete file in folder ----------");
+		deleteAllFileInFolder();
+		log.info("---------- END delete file in folder ----------");
+	}
+
+	public void deleteAllFileInFolder() {
+		try {
+			String workingDir = System.getProperty("user.dir");
+			String pathFolderDownload = workingDir + "\\screenshotReportNG";
+			File file = new File(pathFolderDownload);
+			File[] listOfFiles = file.listFiles();
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile()) {
+					log.info(listOfFiles[i].getName());
+					new File(listOfFiles[i].toString()).delete();
+				}
+			}
+		} catch (Exception e) {
+			System.out.print(e.getMessage());
+		}
+	}
+
+
+
 }

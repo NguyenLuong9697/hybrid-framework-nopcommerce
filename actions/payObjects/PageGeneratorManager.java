@@ -41,4 +41,9 @@ public class PageGeneratorManager {
 		
 		return new ProductReviewPageObject(driver);
 	}
+	
+	public static SearchPageObject getSearchPageObject(WebDriver driver) {
+		
+		return new SearchPageObject(driver);
+	}
 }

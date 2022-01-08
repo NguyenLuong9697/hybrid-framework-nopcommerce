@@ -13,9 +13,10 @@
 	  <parameter name="browser" value="Firefox"/>	
 	    <classes>
 	      <packages>
- 		      	<package name="com.nopcommerce.register"/>  
-		   		<package name="com.nopcommerce.login"/> 
-					<package name="com.nopcommerce.myaccount"/>
+<!--  		      	<package name="com.nopcommerce.register"/>   -->
+<!-- 		   		<package name="com.nopcommerce.login"/>  -->
+<!-- 				<package name="com.nopcommerce.myaccount"/> -->
+					<package name="com.nopcommerce.search"/> 
 	      </packages>
 	    </classes>
 	  </test> 

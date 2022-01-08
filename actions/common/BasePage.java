@@ -506,7 +506,7 @@ public class BasePage {
 		
 	}
 	
-	public boolean isHeaderLinkDisplayByLabelName(WebDriver driver, String headerLinkText) {
+	public boolean isHeaderLinkDisplayByLabelNameDisplay(WebDriver driver, String headerLinkText) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
 		return isElementDisplay(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
 	}
@@ -560,5 +560,10 @@ public class BasePage {
 		sendKeyToElement(driver, UserBasePageUI.DYNAMIC_TEXTAREA_BY_ID, value, idTextArea);
 	}
 	
+	public void selectItemInDropDownByLabelName(WebDriver driver, String dropdownLabelName, String value) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_DROPDROWN_BY_LABEL_NAME, dropdownLabelName);
+		selectItemInDefaultDropdownByText(driver, UserBasePageUI.DYNAMIC_DROPDROWN_BY_LABEL_NAME, value, dropdownLabelName);
+		
+	}
 	
 }

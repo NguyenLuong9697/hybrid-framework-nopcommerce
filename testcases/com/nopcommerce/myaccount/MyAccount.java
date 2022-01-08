@@ -287,10 +287,10 @@ public class MyAccount extends BaseTest {
 		homePageObject = PageGeneratorManager.getHomePageObject(driver);
 		
 		log.info("TC_03_Change_Password: Step 18: Verfify link My account display");
-		verifyTrue(homePageObject.isHeaderLinkDisplayByLabelName(driver,"My account"));
+		verifyTrue(homePageObject.isHeaderLinkDisplayByLabelNameDisplay(driver,"My account"));
 		
 		log.info("TC_03_Change_Password: Step 19: Verfify link Log out display");
-		verifyTrue(homePageObject.isHeaderLinkDisplayByLabelName(driver,"Log out"));
+		verifyTrue(homePageObject.isHeaderLinkDisplayByLabelNameDisplay(driver,"Log out"));
 		
 	}
 	

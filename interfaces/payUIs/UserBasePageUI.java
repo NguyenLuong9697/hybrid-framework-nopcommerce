@@ -11,5 +11,6 @@ public class UserBasePageUI {
 	public static final String DYNAMIC_LINK_FOOTER_BY_LABEL_NAME="//div[@class='footer']//a[text()='%s']";
 	public static final String DYNAMIC_MENU_PAGE_BY_LABEL_NAME="//div[@class='header-menu']/ul[@class='top-menu notmobile']//a[contains(text(),'%s')]";
 	public static final String DYNAMIC_TEXTAREA_BY_ID="//textarea[@id='%s']";
+	public static final String DYNAMIC_DROPDROWN_BY_LABEL_NAME="//label[text()='%s']/following-sibling::select";
 }
 
