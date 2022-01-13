@@ -8,8 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import common.BasePage;
+import payUIs.ProductDetailPageUI;
 import payUIs.ProductPageUI;
-import payUIs.SearchPageUI;
 
 public class ProductPageObject extends BasePage {
 	private WebDriver driver;
@@ -126,5 +126,22 @@ public class ProductPageObject extends BasePage {
 		waitForElementInvisible(driver, ProductPageUI.PAGGING_PAGE);		
 		return isElementUndisplayed(driver, ProductPageUI.PAGGING_PAGE);
 		
+	}
+
+	public void clickButtonByTitleThroughProductName(String productName, String titleButton) {
+		waitForElementClickable(driver, ProductPageUI.DYNAMIC_BUTTON_BY_TITLE_THROUGH_PRODUCT_NAME, productName,titleButton);
+		clickToElement(driver,ProductPageUI.DYNAMIC_BUTTON_BY_TITLE_THROUGH_PRODUCT_NAME, productName,titleButton);
+	}
+
+	public Object getMessageSuccessfullAfterAddToComapre() {
+		waitForElementVisible(driver, ProductPageUI.MESSAGE_SUCCESSFULL_AFTER_ADD_TO_COMPARE);
+		return getTextElement(driver, ProductPageUI.MESSAGE_SUCCESSFULL_AFTER_ADD_TO_COMPARE );
+	
+	}
+
+	public CompareProductPageObject clickLinkProductComparison() {
+		waitForElementClickable(driver, ProductPageUI.LINK_PRODUCT_COMPARISON);
+		clickToElement(driver,ProductPageUI.LINK_PRODUCT_COMPARISON);
+		return PageGeneratorManager.getCompareProductPageObject(driver);
 	}
 }

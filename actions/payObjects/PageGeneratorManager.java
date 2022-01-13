@@ -46,4 +46,22 @@ public class PageGeneratorManager {
 		
 		return new SearchPageObject(driver);
 	}
+	
+	public static WishListPageObject getWishListPageObject(WebDriver driver) {
+		
+		return new WishListPageObject(driver);
+	}
+	public static ShoppingCartPageObject getShoppingCartPageObject(WebDriver driver) {
+		
+		return new ShoppingCartPageObject(driver);
+	}
+	public static CompareProductPageObject getCompareProductPageObject(WebDriver driver) {
+		
+		return new CompareProductPageObject(driver);
+	}
+	
+	public static RecentlyViewedProductPageObject getRecentlyViewedProductPageObject(WebDriver driver) {
+		
+		return new RecentlyViewedProductPageObject(driver);
+	}
 }

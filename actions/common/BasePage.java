@@ -86,6 +86,23 @@ public class BasePage {
 			return false;
 		}
 	}
+	public boolean isElementUndisplayed(WebDriver driver, String locator, String...params )
+	{
+		locator=getDynamiLocator(locator, params);
+		overrideGlobalTimeOut(driver, shortTimeOut);
+		List<WebElement> listElement= getListWebElements(driver, locator);
+		overrideGlobalTimeOut(driver, longTimeOut);
+		if(listElement.size()==0) {
+			System.out.println("Element not in DOM");
+			return true;
+		}else if(listElement.size()>0 && !listElement.get(0).isDisplayed()) {
+			System.out.println("Element in DOM but undisplay");
+			return true;
+		}else {
+			System.out.println("Element in DOM and display");
+			return false;
+		}
+	}
 	public void acceptAlert(WebDriver driver) {
 		alert=waitAlertPresence(driver);
 		alert.accept();
@@ -457,6 +474,12 @@ public class BasePage {
 		explicit.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(getXPathLocator(locator)));
 	}
 	public void waitForElementInvisible(WebDriver driver, String locator) {
+		explicit=new WebDriverWait(driver, longTimeOut);
+		explicit.until(ExpectedConditions.invisibilityOfElementLocated(getXPathLocator(locator)));
+		
+	}
+	public void waitForElementInvisible(WebDriver driver, String locator, String... params) {
+		locator = getDynamiLocator(locator, params);
 		explicit=new WebDriverWait(driver, longTimeOut);
 		explicit.until(ExpectedConditions.invisibilityOfElementLocated(getXPathLocator(locator)));
 		

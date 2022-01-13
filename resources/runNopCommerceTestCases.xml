@@ -14,12 +14,14 @@
 		<parameter name="browser" value="Firefox" />
 		<classes>
 			<packages>
-<!-- 				<package name="com.nopcommerce.register" /> -->
-<!-- 				<package name="com.nopcommerce.login" /> -->
-<!-- 				<package name="com.nopcommerce.myaccount" /> -->
-<!-- 				<package name="com.nopcommerce.search" /> -->
-<!-- 				<package name="com.nopcommerce.sort" /> -->
-				<package name="com.nopcommerce.display" />
+				<!-- <package name="com.nopcommerce.register" /> -->
+				<!-- <package name="com.nopcommerce.login" /> -->
+				<!-- <package name="com.nopcommerce.myaccount" /> -->
+				<!-- <package name="com.nopcommerce.search" /> -->
+				<!-- <package name="com.nopcommerce.sort" /> -->
+				<!-- <package name="com.nopcommerce.display" /> -->
+				<package name="com.nopcommerce.wishlist" />
+				
 			</packages>
 		</classes>
 	</test>
@@ -27,14 +29,14 @@
 	<!-- <test name="Run on Chrome"> -->
 	<!-- <parameter name="browser" value="Chrome"/> -->
 	<!-- <packages> -->
-	<!--  <package name="com.nopcommerce.register"/> -->
+	<!-- <package name="com.nopcommerce.register"/> -->
 
 	<!-- <package name="com.nopcommerce.login"/> -->
-	
-	<!--  <package name="com.nopcommerce.myaccount"/> -->
-	
+
+	<!-- <package name="com.nopcommerce.myaccount"/> -->
+
 	<!-- <package name="com.nopcommerce.search"/> -->
-	
+
 	<!-- <package name="com.nopcommerce.sort"/> -->
 	<!-- </packages> -->
 	<!-- </test> -->

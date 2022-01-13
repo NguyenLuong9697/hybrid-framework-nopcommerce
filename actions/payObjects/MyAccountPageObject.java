@@ -14,7 +14,7 @@ public class MyAccountPageObject extends BasePage{
 		waitForElementVisible(driver, MyAccountPageUI.INFOR_ADDRESS_BY_CLASS_NAME , classNameAdrress);
 		return getTextElement(driver, MyAccountPageUI.INFOR_ADDRESS_BY_CLASS_NAME , classNameAdrress);
 	}
-	public Object getMessageSuccessfullAfterChangePassword() {
+	public String getMessageSuccessfullAfterChangePassword() {
 		waitForElementVisible(driver, MyAccountPageUI.MESSAGE_SUCCESSFULL_AFTER_CHANGE_PW );
 		return getTextElement(driver, MyAccountPageUI.MESSAGE_SUCCESSFULL_AFTER_CHANGE_PW );
 	
