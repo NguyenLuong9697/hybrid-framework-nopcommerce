@@ -173,7 +173,7 @@ public class WishList extends BaseTest {
 		shoppingCartPageObject = PageGeneratorManager.getShoppingCartPageObject(driver);
 		
 		log.info("TC_02_Add_Product_To_Cart_From_WishList - Step 11:Verify product is displayed in shopping cart");
-		verifyTrue(shoppingCartPageObject.isRowValueDisplayed("MS_WIN_8P", productName,"$65.00","$65.00"));	
+		verifyTrue(shoppingCartPageObject.isProductDisplayed(driver,"MS_WIN_8P", productName,"$65.00","$65.00"));	
 		
 		log.info("TC_02_Add_Product_To_Cart_From_WishList - Step 12:Click Wishlist in footer");
 		shoppingCartPageObject.clickToFooterLinkByLabelName(driver, "Wishlist");
@@ -218,6 +218,7 @@ public class WishList extends BaseTest {
 		log.info("TC_04_Add_Product_To_Compare -Step 05: Click sub menu Desktops");;
 		compareProductPageObject.openSubMenuByLabelName(driver, "Computers", "Desktops");
 		productPageObject = PageGeneratorManager.getProductPageObject(driver);
+		
 		productNameCompare_2="Digital Storm VANQUISH 3 Custom Performance PC";
 		priceProductCompare_2="$1,259.00";
 		log.info("TC_04_Add_Product_To_Compare -Step 06: Click icon Add to compare list");
@@ -352,7 +353,7 @@ public class WishList extends BaseTest {
 	@AfterClass(alwaysRun = true)
 	public void afterClass(@Optional("chrome")String browserName) {
 		log.info("Postcondition: Close the browser:" + browserName);
-		//cleanBrowserAndDriver();
+		cleanBrowserAndDriver();
 	}
 
 }

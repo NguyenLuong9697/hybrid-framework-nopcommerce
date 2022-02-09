@@ -144,4 +144,5 @@ public class ProductPageObject extends BasePage {
 		clickToElement(driver,ProductPageUI.LINK_PRODUCT_COMPARISON);
 		return PageGeneratorManager.getCompareProductPageObject(driver);
 	}
+
 }

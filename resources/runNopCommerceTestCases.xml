@@ -20,8 +20,8 @@
 				<!-- <package name="com.nopcommerce.search" /> -->
 				<!-- <package name="com.nopcommerce.sort" /> -->
 				<!-- <package name="com.nopcommerce.display" /> -->
-				<package name="com.nopcommerce.wishlist" />
-				
+				<!-- <package name="com.nopcommerce.wishlist" /> -->
+				<package name="com.nopcommerce.order" />
 			</packages>
 		</classes>
 	</test>

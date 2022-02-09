@@ -1,5 +1,6 @@
 package common;
 
+
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -527,6 +528,11 @@ public class BasePage {
 		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_LABEL_NAME, buttonLabelName);
 		clickToElement(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_LABEL_NAME, buttonLabelName);
 	}
+	public void clickToButtonByID(WebDriver driver, String idbutton) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_ID, idbutton);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_ID, idbutton);
+	}
+
 
 	public String getErrorMessageByID(WebDriver driver, String idErrorMessage) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_ERROR_MESSAGE, idErrorMessage);
@@ -602,4 +608,57 @@ public class BasePage {
 		
 	}
 
+	public boolean isProductDisplayed(WebDriver driver,String sku, String productName, String price, String total) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_ROW_VALUE_BY_SKU_PRODUCTNAME_PRICE_TOTAL, sku,
+				productName, price, total);
+		return isElementDisplay(driver, UserBasePageUI.DYNAMIC_ROW_VALUE_BY_SKU_PRODUCTNAME_PRICE_TOTAL, sku,
+				productName, price, total);
+
+	}
+	public boolean isInformationAtAddressDisplayed(WebDriver driver, String section,String fullName,String emailAddress,String phoneNumber,String address_1,String city_state_zipCode,String country, String methodPaymentOrMethodShipping) {
+		waitForElementVisible(driver, UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section, "name", fullName);
+		boolean isNameDisplay = isElementDisplay(driver,UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS,section, "name",fullName);
+		
+		waitForElementVisible(driver, UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section,"email",emailAddress);
+		boolean isEmailDisplay = isElementDisplay(driver,UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section,"email", emailAddress);
+		
+		waitForElementVisible(driver, UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS,section, "phone",phoneNumber);
+		boolean isPhoneDisplay = isElementDisplay(driver,UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section,"phone", phoneNumber);
+		
+		waitForElementVisible(driver, UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section,"address1",address_1);
+		boolean isAddressDisplay = isElementDisplay(driver,UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section,"address1", address_1);
+		
+		waitForElementVisible(driver, UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section,"city-state-zip",city_state_zipCode);
+		boolean isCityStateZipDisplay = isElementDisplay(driver,UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section,"city-state-zip",city_state_zipCode);
+		
+		waitForElementVisible(driver, UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section,"country",country);
+		boolean isCountryDisplay = isElementDisplay(driver,UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section,"country",country);
+		
+		boolean isPaymentOrShippingMethod=false;
+		//System.out.println("================");
+		//System.out.println("methodPaymentOrMethodShipping:"+methodPaymentOrMethodShipping);
+		if(section.equals("billing-info")) {
+			waitForElementVisible(driver, UserBasePageUI.PAYMENT_OR_SHIPPING_METHOD, "payment-method",methodPaymentOrMethodShipping);
+			isPaymentOrShippingMethod = isElementDisplay(driver,UserBasePageUI.PAYMENT_OR_SHIPPING_METHOD, "payment-method",methodPaymentOrMethodShipping);
+		}
+		else {
+			waitForElementVisible(driver, UserBasePageUI.PAYMENT_OR_SHIPPING_METHOD, "shipping-method",methodPaymentOrMethodShipping);
+			isPaymentOrShippingMethod = isElementDisplay(driver,UserBasePageUI.PAYMENT_OR_SHIPPING_METHOD, "shipping-method",methodPaymentOrMethodShipping);
+		}
+		return isNameDisplay && isCityStateZipDisplay && isEmailDisplay && isPhoneDisplay && isAddressDisplay && isCountryDisplay && isPaymentOrShippingMethod;
+	}
+	
+
+	public boolean isInformationAboutGiftWrappingNoDisplay(WebDriver driver, String classEle) {
+		waitForElementVisible(driver, UserBasePageUI.GIFT_WRAPPING,classEle);
+		return isElementDisplay(driver, UserBasePageUI.GIFT_WRAPPING,classEle);
+	}
+	public String getInformationAtBillByLabel(WebDriver driver,String labelName) {
+		waitForElementVisible(driver, UserBasePageUI.INFORMATION_AT_BILL_BY_LABEL_NAME,labelName);
+		return getTextElement(driver, UserBasePageUI.INFORMATION_AT_BILL_BY_LABEL_NAME,labelName);
+	}
+	public boolean isInformationAboutShippingMethodDisplay(WebDriver driver, String shippingMethod) {
+		waitForElementVisible(driver,UserBasePageUI.SHIPPING_METHOD,shippingMethod);
+		return isElementDisplay(driver, UserBasePageUI.SHIPPING_METHOD,shippingMethod);
+	}
 }

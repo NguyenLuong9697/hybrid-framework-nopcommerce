@@ -1,8 +1,11 @@
 package utilities;
 
+import java.util.Locale;
+
 import com.github.javafaker.Faker;
 
 public class DataUtil {
+	//private Locale locale = new Locale("vi");
 	private Faker faker;
 	public static DataUtil getData() {
 		return new DataUtil();
@@ -33,6 +36,7 @@ public class DataUtil {
 	}
 	
 	public String getCompanyName() {
+		
 		return faker.company().name();
 	}
 	

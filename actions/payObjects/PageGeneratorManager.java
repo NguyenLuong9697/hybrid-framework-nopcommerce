@@ -64,4 +64,10 @@ public class PageGeneratorManager {
 		
 		return new RecentlyViewedProductPageObject(driver);
 	}
+	
+	
+	public static CheckoutPageObject getCheckoutPageObject(WebDriver driver) {
+		
+		return new CheckoutPageObject(driver);
+	}
 }
