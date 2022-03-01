@@ -1,5 +1,6 @@
 package factoryBrowser;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,8 @@ public class ChromeDriverManager implements BrowserFactory{
 	public WebDriver getBrowserDriver() {
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
+		//System.setProperty("webdriver.chrome.driver",projectPath+"\\browserDriver\\chromedriver.exe");
+		options.addExtensions(new File(GlobalConstants.PROJECT_PATH +  GlobalConstants.SEPERATOR+ "browserExtension"+ GlobalConstants.SEPERATOR+"UltraSurf-Security--Privacy---Unblock-VPN.crx"));
 		options.addArguments("--disable-infobars");
 		options.addArguments("--disable-notifications");
 		options.addArguments("--disable-geolocation");

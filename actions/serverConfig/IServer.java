@@ -10,4 +10,9 @@ public interface IServer extends Config{
 	@Key("url")
 	String url();
 	
+	@Key("email")
+	String email();
+	
+	@Key("pass")
+	String pass();
 }

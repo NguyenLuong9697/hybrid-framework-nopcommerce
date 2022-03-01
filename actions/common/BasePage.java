@@ -19,7 +19,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import payUIs.UserBasePageUI;
+
+import payUIs.admin.AdminBasePageUI;
+import payUIs.admin.NewCustomerPageUI;
+import payUIs.admin.ProductDetailPageUI;
+import payUIs.user.UserBasePageUI;
 
 
 
@@ -65,7 +69,7 @@ public class BasePage {
 		driver.navigate().forward();
 	}
 	
-	public void overrideGlobalTimeOut(WebDriver driver, long timeout) {
+	public void overrideImplicitTimeOut(WebDriver driver, long timeout) {
 		driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
 	}
 	public Alert waitAlertPresence(WebDriver driver) {
@@ -73,9 +77,9 @@ public class BasePage {
 		return alert=explicit.until(ExpectedConditions.alertIsPresent());
 	}
 	public boolean isElementUndisplayed(WebDriver driver, String locator) {
-		overrideGlobalTimeOut(driver, shortTimeOut);
+		overrideImplicitTimeOut(driver, shortTimeOut);
 		List<WebElement> listElement= getListWebElements(driver, locator);
-		overrideGlobalTimeOut(driver, longTimeOut);
+		overrideImplicitTimeOut(driver, longTimeOut);
 		if(listElement.size()==0) {
 			System.out.println("Element not in DOM");
 			return true;
@@ -90,9 +94,9 @@ public class BasePage {
 	public boolean isElementUndisplayed(WebDriver driver, String locator, String...params )
 	{
 		locator=getDynamiLocator(locator, params);
-		overrideGlobalTimeOut(driver, shortTimeOut);
+		overrideImplicitTimeOut(driver, shortTimeOut);
 		List<WebElement> listElement= getListWebElements(driver, locator);
-		overrideGlobalTimeOut(driver, longTimeOut);
+		overrideImplicitTimeOut(driver, longTimeOut);
 		if(listElement.size()==0) {
 			System.out.println("Element not in DOM");
 			return true;
@@ -223,6 +227,7 @@ public class BasePage {
 			if(item.getText().trim().equals(expectedItem)) {
 				jsExecutor.executeScript("arguments[0].scrollIntoView(true);", item);
 				sleepInSecond(1);
+				
 				item.click();
 				sleepInSecond(1);
 				break;
@@ -382,6 +387,12 @@ public class BasePage {
 		jsExecutor=(JavascriptExecutor)driver;
 		jsExecutor.executeScript("arguments[0].scrollIntoView(true);", getWebElement(driver,locator));
 	}
+	public void scrollToElement(WebDriver driver,String locator, String...params) {
+		jsExecutor=(JavascriptExecutor)driver;
+		locator = getDynamiLocator(locator, params);
+		jsExecutor.executeScript("arguments[0].scrollIntoView(true);", getWebElement(driver,locator));
+	}
+
 
 	public void sendkeyToElementByJS(WebDriver driver,String locator, String value) {
 		jsExecutor=(JavascriptExecutor)driver;
@@ -396,10 +407,13 @@ public class BasePage {
 	public String getTextElementByJS(WebDriver driver,String locator,String ...params) {
 		locator = getDynamiLocator(locator, params);
 		jsExecutor=(JavascriptExecutor)driver;
-		String script=" return $(document.evaluate(\"//input[@id='Address_FirstName']\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()";
+		//String script=" return $(document.evaluate(\"//input[@id='Address_FirstName']\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()";
 		//String s="$(document.evaluate("//input[@id='Address_FirstName']", document, nul"l, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()
 		//String script="$(document.evaluate(""+locator+ ", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()";
 		//System.out.println(s);
+		// String s="//input[@id='Address_FirstName']";
+		String script= "return $(document.evaluate(" +"\""+  locator +"\""+", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()";
+//		    
 		return (String) jsExecutor.executeScript(script);
 	}
 	public String getElementValidationMessage(WebDriver driver,String locator) {
@@ -479,9 +493,22 @@ public class BasePage {
 		explicit.until(ExpectedConditions.invisibilityOfElementLocated(getXPathLocator(locator)));
 		
 	}
+	
+	/*
+	 * 
+	 * Wait for element undisplayed in DOM or not DOM and overide time out
+	 */
+	public void waitForElementUnDisplay(WebDriver driver, String locator, String... params) {
+		locator = getDynamiLocator(locator, params);		
+		explicit=new WebDriverWait(driver, shortTimeOut);
+		overrideImplicitTimeOut(driver, shortTimeOut);
+		explicit.until(ExpectedConditions.invisibilityOfElementLocated(getXPathLocator(locator)));
+		
+	}
 	public void waitForElementInvisible(WebDriver driver, String locator, String... params) {
 		locator = getDynamiLocator(locator, params);
-		explicit=new WebDriverWait(driver, longTimeOut);
+		
+		explicit=new WebDriverWait(driver, shortTimeOut);
 		explicit.until(ExpectedConditions.invisibilityOfElementLocated(getXPathLocator(locator)));
 		
 	}
@@ -545,6 +572,10 @@ public class BasePage {
 		return isElementDisplay(driver, UserBasePageUI.DYNAMIC_LINK_HEADER_BY_LABEL_NAME, headerLinkText);
 	}
 	
+	public void clickToButtonByAttributeName(WebDriver driver, String nameButton) {
+		waitForElementClickable(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_ATTRIBUTE_NAME, nameButton);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_BUTTON_BY_ATTRIBUTE_NAME,nameButton);
+	}
 	public String getDataInTextboxByID(WebDriver driver, String idTextbox) {
 		waitForElementVisible(driver,UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID ,idTextbox);
 		return getAttributeElement(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, "value", idTextbox);
@@ -564,10 +595,14 @@ public class BasePage {
 	
 	public boolean isRadioButtonSelectedByLabelName(WebDriver driver, String radioButtonLabelName) {
 		waitForElementVisible(driver,UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME , radioButtonLabelName);
-		return  isElementDisplay(driver,UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME , radioButtonLabelName);
+		return  isElementSelected(driver,UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_LABEL_NAME , radioButtonLabelName);
 		
 	}
-	
+	public boolean isCheckboxSelectedByID(WebDriver driver, String idCheckbox) {
+		waitForElementVisible(driver,UserBasePageUI.DYNAMIC_CHECKBOX_BY_ID , idCheckbox);
+		return  isElementSelected(driver,UserBasePageUI.DYNAMIC_CHECKBOX_BY_ID , idCheckbox);
+		
+	}
 	public String getSelectedValueInDropdrownByName(WebDriver driver, String dropdownName) {
 		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_DROPDROWN_BY_NAME, dropdownName);
 		return getSelectedItemInDefaultDropdown(driver, UserBasePageUI.DYNAMIC_DROPDROWN_BY_NAME, dropdownName);
@@ -615,6 +650,12 @@ public class BasePage {
 				productName, price, total);
 
 	}
+	public boolean isProductDisplayed(WebDriver driver,String productName, String sku) {
+		waitForElementVisible(driver, AdminBasePageUI.DYNAMIC_ROW_VALUE_BY_PRODUCTNAME_SKU_IN_PAGE_ADMIN,productName, sku);
+				
+		return isElementDisplay(driver, AdminBasePageUI.DYNAMIC_ROW_VALUE_BY_PRODUCTNAME_SKU_IN_PAGE_ADMIN, productName,sku);
+
+	}
 	public boolean isInformationAtAddressDisplayed(WebDriver driver, String section,String fullName,String emailAddress,String phoneNumber,String address_1,String city_state_zipCode,String country, String methodPaymentOrMethodShipping) {
 		waitForElementVisible(driver, UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS, section, "name", fullName);
 		boolean isNameDisplay = isElementDisplay(driver,UserBasePageUI.INFORMATION_AT_BILLING_ADRRESS,section, "name",fullName);
@@ -660,5 +701,115 @@ public class BasePage {
 	public boolean isInformationAboutShippingMethodDisplay(WebDriver driver, String shippingMethod) {
 		waitForElementVisible(driver,UserBasePageUI.SHIPPING_METHOD,shippingMethod);
 		return isElementDisplay(driver, UserBasePageUI.SHIPPING_METHOD,shippingMethod);
+	}
+
+	//Admin-NopCommerce
+	public void openSubMenuThroughMenuByName(WebDriver driver,String menuPageName, String submenuPageName) {
+		waitForElementClickable(driver,AdminBasePageUI.MENU_LINK_BY_NAME, menuPageName);
+		clickToElement(driver,AdminBasePageUI.MENU_LINK_BY_NAME, menuPageName);
+		waitForElementClickable(driver,AdminBasePageUI.SUB_MENU_LINK_BY_NAME, submenuPageName);
+		clickToElement(driver,AdminBasePageUI.SUB_MENU_LINK_BY_NAME, submenuPageName);
+		
+	}
+
+	public boolean isMessageInTableByIDTableDisplay(WebDriver driver, String idTable, String message) {
+		waitForElementVisible(driver, AdminBasePageUI.MESSAGE_IN_TABLE_BY_ID_TABLE, idTable,message);
+		return isElementDisplay(driver,AdminBasePageUI.MESSAGE_IN_TABLE_BY_ID_TABLE,idTable, message, null);
+	}
+
+	public void clickToCheckboxByID(WebDriver driver, String idCheckbox) {
+		waitForElementClickable(driver,UserBasePageUI.DYNAMIC_CHECKBOX_BY_ID , idCheckbox);
+		checkToDefaultCheckboxOrDefaultRadio(driver,UserBasePageUI.DYNAMIC_CHECKBOX_BY_ID , idCheckbox);
+		
+	}
+	
+	public void clickToUnCheckboxByID(WebDriver driver, String idCheckbox) {
+		
+		if(isElementSelected(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_ID , idCheckbox)) {
+			waitForElementClickable(driver,UserBasePageUI.DYNAMIC_CHECKBOX_BY_ID , idCheckbox);
+			clickToElement(driver, UserBasePageUI.DYNAMIC_CHECKBOX_BY_ID , idCheckbox);
+		}
+	}
+	public String getSelectedValueInDropDownByName(WebDriver driver, String nameDropdown) {
+		waitForElementVisible(driver,UserBasePageUI.DYNAMIC_DROPDROWN_BY_NAME, nameDropdown);		
+		return getSelectedItemInDefaultDropdown(driver,UserBasePageUI.DYNAMIC_DROPDROWN_BY_NAME, nameDropdown);
+	}
+
+	public String getAttributeTextboxByID(WebDriver driver, String attribute, String idTextbox) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID,idTextbox);
+		return getAttributeElement(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID, attribute,idTextbox);
+		
+	}
+	public void clickHeaderLinkByText(WebDriver driver, String headerLinkText) {
+		waitForElementClickable(driver, AdminBasePageUI.DYNAMIC_HEADER_LINK_BY_TEXT,headerLinkText);
+		clickToElementByJS(driver, AdminBasePageUI.DYNAMIC_HEADER_LINK_BY_TEXT,headerLinkText);
+	}	
+	
+	public void clickToExpandPanelByCardName(WebDriver driver,String cardName) {
+		// TODO Auto-generated method stub
+		//1 get tag i attribute
+		//2 not contains(fa-plus)-> k lam gi ngc lai
+		// 3 click
+		waitForElementClickable(driver,AdminBasePageUI.TOOGLE_ICON_BY_CARD_NAME ,cardName);
+		String status=getAttributeElement(driver, AdminBasePageUI.TOOGLE_ICON_BY_CARD_NAME, "class", cardName);
+		if(status.contains("fa-plus")) {
+			clickToElement(driver,AdminBasePageUI.TOOGLE_ICON_BY_CARD_NAME ,cardName);
+		}
+	}
+	
+
+	public void clickToRadioButtonByID(WebDriver driver, String idRaditoButton) {
+		waitForElementClickable(driver,UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_ID , idRaditoButton);
+		clickToElement(driver, UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_ID , idRaditoButton);
+		
+	}	
+	
+	public boolean isRadioButtonSelectedByID(WebDriver driver, String idRadioButton) {
+		waitForElementVisible(driver,UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_ID , idRadioButton);
+		return  isElementSelected(driver,UserBasePageUI.DYNAMIC_RADIO_BUTTON_BY_ID , idRadioButton);
+		
+	}
+
+	public boolean isSuccessMessageDisplay(WebDriver driver, String message) {
+		waitForElementVisible(driver, AdminBasePageUI.DYNAMIC_SUCCESS_MESSAGE, message);
+		return isElementDisplay(driver, AdminBasePageUI.DYNAMIC_SUCCESS_MESSAGE, message);
+	}
+
+	public void clickToDeleteCustomerRoleByName(WebDriver driver,String customerRole) {
+		waitForElementClickable(driver, AdminBasePageUI.ICON_DELTE_BY_NAME_CUSTOMER_ROLE,customerRole);
+		clickToElementByJS(driver, AdminBasePageUI.ICON_DELTE_BY_NAME_CUSTOMER_ROLE,customerRole);
+	}
+	public void selectItemInDropDownCustomerRole(WebDriver driver, String listboxText,String customerRole) {
+		scrollToElement(driver,AdminBasePageUI.LISTBOX_BY_TEXT,listboxText);
+		clickToElementByJS(driver, AdminBasePageUI.LISTBOX_BY_TEXT,listboxText);
+		clickToElementByJS(driver,AdminBasePageUI.DYNAMIC_CUSTOMER_ROLE_BY_TEXT,customerRole);
+		
+	}
+		
+	public boolean isSelectedValueOfCustomerRoleDisplayByText(WebDriver driver,String customerRole) {
+		waitForElementVisible(driver, AdminBasePageUI.SELECT_VALUE_IN_CUSTOMER_ROLE,customerRole);
+		return isElementDisplay(driver, AdminBasePageUI.SELECT_VALUE_IN_CUSTOMER_ROLE,customerRole);
+	}
+
+	public boolean isInformationCustomerDisplay(WebDriver driver, String email, String customerFullName,
+			String customerRole, String customerCompany, String active) {
+		boolean isDisplay =false;
+		if(active.equals("Active")) {
+			waitForElementVisible(driver, AdminBasePageUI.INFORMATION_CUSTOMER_BY_EMAIL_FULLNAME_ROLE_COMPANY_ACTIVE,email,customerFullName,customerRole,customerCompany);
+			isDisplay= isElementDisplay(driver, AdminBasePageUI.INFORMATION_CUSTOMER_BY_EMAIL_FULLNAME_ROLE_COMPANY_ACTIVE,email,customerFullName,customerRole,customerCompany);
+		}
+		return isDisplay;
+	}
+	
+	public String getTextInTextBoxByIDThroughJS(WebDriver driver, String idTextbox) {
+		waitForElementVisible(driver, UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID,idTextbox);
+		return getTextElementByJS(driver,UserBasePageUI.DYNAMIC_TEXTBOX_BY_ID,idTextbox);
+		 
+	}
+	
+	public void clickToLinkByText(WebDriver driver, String linkText) {
+		waitForElementClickable(driver,AdminBasePageUI.DYNAMIC_LINK_BY_TEXT , linkText);
+		clickToElement(driver,AdminBasePageUI.DYNAMIC_LINK_BY_TEXT, linkText);
+		
 	}
 }

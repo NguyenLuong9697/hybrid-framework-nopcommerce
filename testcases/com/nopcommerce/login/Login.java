@@ -11,10 +11,10 @@ import org.testng.annotations.Test;
 import com.nopcommerce.register.Register;
 
 import common.BaseTest;
-import payObjects.HomePageObject;
-import payObjects.LoginPageObject;
-import payObjects.PageGeneratorManager;
-import payObjects.RegisterPageObject;
+import pageObjects.user.HomePageObject;
+import pageObjects.user.LoginPageObject;
+import pageObjects.user.PageGeneratorManager;
+import pageObjects.user.RegisterPageObject;
 import serverConfig.IServer;
 import utilities.DataUtil;
 

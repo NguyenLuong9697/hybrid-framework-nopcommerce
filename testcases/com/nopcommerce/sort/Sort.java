@@ -8,12 +8,12 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import common.BaseTest;
-import payObjects.HomePageObject;
-import payObjects.LoginPageObject;
-import payObjects.PageGeneratorManager;
-import payObjects.ProductPageObject;
-import payObjects.RegisterPageObject;
-import payObjects.SearchPageObject;
+import pageObjects.user.HomePageObject;
+import pageObjects.user.LoginPageObject;
+import pageObjects.user.PageGeneratorManager;
+import pageObjects.user.ProductPageObject;
+import pageObjects.user.RegisterPageObject;
+import pageObjects.user.SearchPageObject;
 import serverConfig.IServer;
 import utilities.DataUtil;
 

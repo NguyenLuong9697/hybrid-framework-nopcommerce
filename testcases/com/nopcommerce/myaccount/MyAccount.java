@@ -9,14 +9,14 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import common.BaseTest;
-import payObjects.HomePageObject;
-import payObjects.LoginPageObject;
-import payObjects.MyAccountPageObject;
-import payObjects.PageGeneratorManager;
-import payObjects.ProductDetailPageObject;
-import payObjects.ProductPageObject;
-import payObjects.ProductReviewPageObject;
-import payObjects.RegisterPageObject;
+import pageObjects.user.HomePageObject;
+import pageObjects.user.LoginPageObject;
+import pageObjects.user.MyAccountPageObject;
+import pageObjects.user.PageGeneratorManager;
+import pageObjects.user.ProductDetailPageObject;
+import pageObjects.user.ProductPageObject;
+import pageObjects.user.ProductReviewPageObject;
+import pageObjects.user.RegisterPageObject;
 import serverConfig.IServer;
 import utilities.DataUtil;
 

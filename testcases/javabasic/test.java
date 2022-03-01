@@ -24,7 +24,16 @@ public class test {
 		    System.out.println(LocalDateTime.now().getMinute());     // 36
 		    System.out.println(LocalDateTime.now().getDayOfWeek().toString().toLowerCase());
 		    // 51
+		    String script1="return $(document.evaluate(\"//input[@id='Address_FirstName']\", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()";
 		  //  System.out.println(LocalDateTime.now().get(ChronoField.MILLI_OF_SECOND)); // 100
+		    String s="//input[@id='Address_FirstName']";
+		    String script= "return $(document.evaluate(" +"\""+  s +"\""+", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue).val()";
+//		    
+//		    String s1 = "abc";
+//	        String s2 = "truong";
+//	        String s = "truong" + " \"" + s1+ "\"" + s2;
+	         System.out.println(script1);
+		   System.out.println(script);
 	}
 	
 }

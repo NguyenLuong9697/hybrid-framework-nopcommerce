@@ -99,6 +99,14 @@
 		<appender-ref ref="file" />
 		<appender-ref ref="reportng" />
 	</category>
+	
+	<category name="com.nopcommerce.admin">
+		<priority value="all" />
+		<appender-ref ref="console" />
+		<appender-ref ref="logfile" />
+		<appender-ref ref="file" />
+		<appender-ref ref="reportng" />
+	</category>
 	<category name="com.nopcomerce.common">
 			<priority value="all" />
 			<appender-ref ref="console" />
